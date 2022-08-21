@@ -1,0 +1,173 @@
+%==============================================================================
+% Sjabloon onderzoeksvoorstel bachelorproef
+%==============================================================================%
+% Compileren in TeXstudio:
+%
+% - Zorg dat Biber de bibliografie compileert (en niet Biblatex)
+%   Options > Configure > Build > Default Bibliography Tool: "txs:///biber"
+% - F5 om te compileren en het resultaat te bekijken.
+% - Als de bibliografie niet zichtbaar is, probeer dan F5 - F8 - F5
+%   Met F8 compileer je de bibliografie apart.
+%
+% Als je JabRef gebruikt voor het bijhouden van de bibliografie, zorg dan
+% dat je in ``biblatex''-modus opslaat: File > Switch to BibLaTeX mode.
+
+\documentclass{hogent-article}
+\usepackage[utf8]{inputenc}
+\usepackage[acronym]{glossaries}
+\usepackage{lipsum}% Voor vultekst
+\usepackage[dutch]{babel} 
+\usepackage{listings} % Broncode mooi opmaken
+\usepackage{hyperref} % click links
+\hypersetup{
+    colorlinks=true,
+    linkcolor=cyan,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Een educatief videospel ontwikkelen voor individuen met een verstandelijke ontwikkelingsstoornis},
+    pdfpagemode=FullScreen,
+    }
+\urlstyle{same}
+\setacronymstyle{long-short-desc}
+
+%---------- Woordenlijst-Acroniemen ----------------------------------------------------------
+\makeglossaries
+\newglossaryentry{up}{name={update},plural={updates},
+description={Vernieuwde versie van een programma of besturingssysteem, waarin bepaalde problemen zijn verholpen en-of nieuwe mogelijkheden worden toegevoegd}}
+\newglossaryentry{bug}{name={bug},plural={bugs},
+description={Aanduiding voor een programmeerfout in een computerprogramma, die leidt tot onjuiste resultaten of het vastlopen of afbreken van het programma}}
+\newglossaryentry{patch}{name={patch},plural={patches},
+description={Patches zijn door softwarefabrikanten ontwikkelde programma's waarmee fouten (bugs) in hun software worden verholpen}}
+\newglossaryentry{sc}{name={videospel computersysteem},plural={videospel computersystemen},
+description={Een computersysteem speciaal ontworpen voor het spelen van videospellen (Engels: Gaming platform)}}
+
+\newacronym[description={}]{PG}{pg}{Point Guard}
+\newacronym[description={}]{SG}{sg}{Shooting Guard}
+\newacronym[description={}]{SF}{sf}{Small Forward}
+\newacronym[description={}]{PF}{pf}{Power Forward}
+\newacronym[description={}]{C}{c}{Center}
+
+
+\PaperTitle{Hoe Machine Learning de strategie in een sport kan bepalen: Basketbal}
+% Dit is typisch de opdracht en het vak waarvoor dit artikel geschreven is, bv.
+% ``Verslag onderzoeksproject Onderzoekstechnieken 2018-2019''
+\PaperType{Research Methods 2021-2022: onderzoeksvoorstel}
+% TODO: (fase 1) vul je eigen naam in als auteur, geef ook je emailadres mee!
+% Authors
+
+\Authors{Van de Perre Vincent\textsuperscript{1}} 
+\hyperlink{https://github.com/vincent-vdp/Basketball_and_AI_Vincent_Van_de_Perre}{https://github.com/vincent-vdp/Basketball_and_AI_Vincent_Van_de_Perre} 
+% Als het hier effectief gaat om een voorstel voor de bachelorproef, dan ben je
+% hier verplicht de naam van je co-promotor in te vullen. Zoniet, dan kan je het
+% leeg laten.
+\CoPromotor{}
+
+% Contactinfo: Geef hier de contactgegevens van elke auteur van het artikel (en
+% indien van toepassing ook van de co-promotor).
+\affiliation{
+  \textsuperscript{1} \href{mailto:vincent.vandeperre@student.hogent.be}{vincent.vandeperre@student.hogent.be}}
+
+%---------- Abstract ----------------------------------------------------------
+\Abstract{% TODO: (fase 6)
+In dit onderzoeksvoorstel wordt er onderzocht hoe machine learning toegepast kan worden in de sportwereld, vooral met betrekking tot basketbal, en hoe deze nieuwe vorm van "coaching" reeds een impact heeft gemaakt op professioneel basketbal.}
+%---------- Onderzoeksdomein en sleutelwoorden --------------------------------
+\Keywords{Artificial Intelligence; Machine Learning; Basketbal; Coaching; Statistiek; Informatica; Sport; Strategie}
+\newcommand{\keywordname}{Sleutelwoorden} % Defines the keywords heading name
+
+%---------- Titel, inhoud -----------------------------------------------------
+
+\date{\today}
+\begin{document}
+\flushbottom % Makes all text pages the same height
+\maketitle % Print the title and abstract box
+\tableofcontents % Print the contents section
+\thispagestyle{empty} % Removes page numbering from the first page
+
+%------------------------------------------------------------------------------
+% Hoofdtekst
+%------------------------------------------------------------------------------
+
+\section{Inleiding}
+% TODO: (fase 2) introduceer je gekozen onderwerp, formuleer de onderzoeksvraag en deelvragen. Wat is de doelstelling (is die S.M.A.R.T.?), wat zal het resultaat zijn van het onderzoek (een Proof-of-Concept, een prototype, een advies, ...)? Waarom is het nuttig om dit onderwerp te onderzoeken?
+Sinds basketbal uitgevonden werd in 1891 te Springfield, Massachusetts door James Naismith, is het bijna onherkenbaar veel veranderd. Het spel zoals het origineel uitgevonden werd, bestond uit slechts 13 regels er was geen driepuntlijn, geen dribbels, etc. Bijna alles wat we in het heden associëren met basketbal, bestond 130 jaar geleden nog niet. Het is dan ook niet verwonderlijk dat de strategie, waarmee het spel gespeeld wordt, ook enorm veel veranderd is doorheen de jaren.
+
+Als we doorheen de geschiedenis van het spel kijken, zijn er enkele beslissingen die opvallen. Ze vallen op omdat ze een enorme impact hebben gehad op de manier hoe men het spel speelt. De eerste regel die het spel veranderde was het introduceren van dribbelen in 1897. Voor dribbelen reglementair werd, mocht men enkel bewegen zonder bal. Wie de bal had, mocht deze enkel gooien naar een andere speler, of naar de mand om te proberen scoren. Door deze regel werd het spel een stuk dynamischer.
+
+Het duurde echter meer dan een halve eeuw vooraleer de volgende grote verandering plaatsvond, deze nieuwe regel was namelijk: de shot clock. De shot clock is een aftellende klok die een team 24 seconden geeft om te proberen scoren vanaf een van hen de bal aanraakt. Scoren ze niet in die 24 seconden, verliezen ze het bezit van de bal. Deze regel werd ingevoerd in 1954 omdat teams er alsmaar meer misbruik van maakten om de bal zo lang mogelijk in hun bezit te houden om de tegenstander zo weinig mogelijk kans te geven. Fans vonden dit echter saai en onsportief. Dankzij de shot clock worden teams tot op heden verplicht om in een korte tijd een zo goed mogelijke manier te zoeken om te scoren.
+
+De derde en laatste fundamentele verandering aan het spel werd uitgevonden in 1967, maar werd pas officieel in 1979 aanvaard door de grootste basketbalcompetitie ter wereld, namelijk NBA (National Basketball Association). Deze verandering was de driepuntlijn, een halve cirkel rond de basket met een straal van ongeveer 7 meter, meer of minder afhankelijk van de competitie.
+
+In het begin werd de driepuntlijn gezien als een grap, met als gevolg dat het nauwelijks gebruikt werd in een wedstrijd. Het was zeldzaam om een team meer dan 1 driepunter te zien maken per NBA wedstrijd. Als je dat vergelijkt met het meest recente seizoen (2021-2022) \autocite{Reynolds2021}, werden er gemiddeld een twaalftal driepunters gescoord per wedstrijd \textbf{per team}! De voorbije 8 jaar stonden in de basketbalwereld bekend als de "driepuntrevolutie", dit heeft natuurlijk een reden. Onze onderzoeksvraag is: "Hoe kan Artificial Intelligence de manier hoe basketbal gespeeld wordt beïnvloeden?".
+\section{Overzicht literatuur}
+% TODO: (fase 4) schrijf de literatuurstudie uit en gebruik waar gepast referenties naar de vakliteratuur.
+% Refereren naar de literatuur kan met:
+% \autocite{BIBTEXKEY} -> (Auteur, jaartal)
+% \textcite{BIBTEXKEY} -> Auteur (jaartal)
+%Voorbeeld van een referentie waar de auteursnaam geen onderdeel van de zin %is~\autocite{Moore2002}.
+% \autocite{BIBTEXKEY} -> (Vedad Hulusic, Nirvana pistoljevic, 2012)
+De literatuur die ik gevonden heb, heeft me veel bijgeleerd over de geschiedenis en wiskundige kant van basketbal. Dankzij bronnen als \autocite{Reynolds2021}, \autocite{Schuhmann2021} en \autocite{Sprawball2019} heb ik meer inzicht gekregen in hoe basketbal de laatste 10 jaar veranderd is en hoe dit de deur heeft geopend naar statistici die op zoek waren om "offense" te maximaliseren binnen de NBA. En hoewel het misschien kortzichtig is om vooral te focussen op de NBA, is dat de competitie die het meeste invloed heeft op het spel ter wereld. Om een metafoor te gebruiken: Als het regent in de NBA, dan druppelt het in FIBA. 
+
+Gelukkig waren er ook andere personen die gelijkaardige interesses hadden als ik, waardoor ik enkele thesissen en artikels heb kunnen vinden over het gebruik van Machine Learning in basketbal, deze bronnen zijn \autocite{BinXinyang2021}, \autocite{Narayan2019}, \autocite{Woo2018} en \autocite{Tian2019}. De een al wat meer wiskundig dan de andere. Persoonlijk vond ik \autocite{Tian2019} het meest interessant omdat in die studie basketbalspelers hun bewegingen getraceerd werden op het plein, waardoor ze hun AI zich moest focussen op de flow van het spel en patronen moest identificeren.
+
+Aangezien het een onderzoek is naar de doorsnede van sport en informatica, heb ik natuurlijk ook moeten opzoeken hoe een Machine Learning Model gemaakt wordt, en hoe je dat best aanpakt. Hiervoor kwam \autocite{BuildMLModel} van pas. 
+
+\section{Methodologie}
+% TODO: (fase 5) beschrijf in detail in welke fasen je onderzoek uiteenvalt, hoe lang elke fase duurt en wat het concrete resultaat van elke fase is. Welke onderzoekstechniek ga je toepassen om elk van je onderzoeksvragen te beantwoorden? Gebruik je hiervoor experimenten, vragenlijsten, simulaties? Je beschrijft ook al welke tools je denkt hiervoor te gebruiken of te ontwikkelen.
+Hetgeen we willen onderzoeken kan bestudeerd worden op meerdere manieren, maar de nodige stappen zijn altijd wel gelijkaardig. Afhankelijk van hoe grondig men te werk gaat, kan er een verschil zijn in de output die het Machine Learning Model teruggeeft. De eerste stap bepaald al meteen het type output, die stap is namelijk: de Analyse.
+
+\subsection{Pre-Productie: Analyse}
+Bij de analyse wordt er beslist wat men precies wilt onderzoeken, dit kan alle richtingen uitgaan omdat basketbal afhankelijk is van talloze factoren. Zo kan er bijvoorbeeld gefocust worden op de manier hoe spelers heen en weer lopen op het plein, waar de open ruimtes zijn, er kan gefocust worden op een paar statistieken, of op ze allemaal. Meestal komt deze keuze neer op de vraag: "Hoe kan [keuze] wel/niet leiden tot succes in basketbal?"
+
+Vervolgens moet er een keuze worden gemaakt over de "scope" of de grootte/grondigheid van het onderzoek: willen we het onderzoek uitvoeren over een korte of een lange termijn, willen we focussen op een enkel team of alle teams die met dezelfde regels spelen.
+
+Wanneer duidelijk is wat men wilt onderzoeken en wat de scope is, kan de technologie gekozen worden. Onder de noemer technologie vallen onder andere: de programmeertaal, de software, een datalabeling software, etc. Soms kan het zijn dat je noodt hebt aan computervisie AI dat in real time zelf conclusies kan trekken, bij andere onderzoeken heb je enkel een analytisch ML model nodig dat bewerkingen uitvoert met de data die gegeven is.
+
+
+
+\subsection{Pre-Productie: Vergaren en Labelen van Data}
+Als je een machine learning model maakt, heb je natuurlijk een dataset nodig. Wanneer je de initiële dataset hebt, kan je volgens \autocite{BuildMLModel} deze opsplitsen in twee delen, een vijfde van de dataset gebruik je als test set en de rest gebruik je als training set. Maar alvorens dat kan gebeuren moet de data ge pre-processed worden. Dit houdt in dat slechte data gefilterd moet worden, hierbij wordt er gekeken of er waarden ontbreken of onmogelijk zijn. 
+
+Als de keuze werd gemaakt om de AI te laten werken met visuele data, dan kan je de data labelen zodat het model getraind kan worden. Labelen highlight de aspecten van de data waar het model zeker op moet letten.
+
+\subsection{Productie: Ontwikkelen en trainen van het Machine Learning Model}
+De volgende stap in het ontwikkelen van een Machine Learning model is bepalen of men aan de hand van het data (kwalitatief of kwantitatief) spreekt van een classificatie model of een regressie model. Om het kort uit te leggen zal een classificatie model zich focussen op "klasseren", het zal dan aan de hand van de data kunnen zeggen tot welke klasse de output behoort. In betrekking van dit onderzoek kan je bijvoorbeeld heel wat data van een speler geven aan het model en die bepaald dan welke positie die speler het best speelt (input X is output van klasse Y).
+
+Bij een regressiemodel wordt er vooral gekeken of de werkelijke waarden overeenkomen met de voorspelde waarden (Y = f(X) waarbij Y de kwantitatieve output is, en X is de input).
+
+Hierna kan een learning algoritme gekozen worden, er is keuze uit de volgende drie: 
+\begin{itemize}
+	\item Supervised Learning
+	\item Unsupervised Learning
+	\item Reinforcement Learning
+\end{itemize}
+
+Supervised Learning houdt in dat het model moet getraind worden met een duidelijk doel voor ogen, je geeft het dus enkel de data die je wilt dat het verwerkt. Dit is het tegenovergestelde van unsupervised learning waarbij men het model (niet-gelabelde) rauwe data geeft en moet het zelf op zoek gaan naar verbanden of conclusies.
+
+Reinforcement Learning is dan weer iets aparts. Bij reinforcement learning leert het model door trial \& error het juiste resultaat te bekomen. Dit algoritme lijkt dus niet meteen van toepassing in dit onderzoek.
+
+Vervolgens ontwikkel je de code voor het model en kan je het beginnen trainen. Dit kan vlot gaan, maar dit kan ook stroef verlopen, dit hangt allemaal af van de kwaliteit van de code, data en labeling. Wanneer het model getraind is, kan men beginnen met het testen met behulp van de test set om consistentie te garanderen.
+
+\subsection{Post-Productie: Output Interpreteren}
+Nu het model op zich klaar is, kan men de output beginnen interpreteren en conclusies trekken. Dit kan op veel verschillende manieren gebeuren, zoals eerder vermeld. Als het gaat om een Machine Learning model dat werkt met computer visie zal er telkens als er visuele input gegeven wordt, feedback gegenereerd worden door het model. Als het echter gaat om een model dat cijfers en statistieken interpreteert, dan zal de feedback ook een andere vorm hebben.
+
+Een Machine Learning Model is op een manier een zeer eenzijdige tool, spijtig genoeg. Met slechts een enkel model zal je nooit voldoende feedback krijgen om een volledig beeld te krijgen van een sport. Cijfers vertellen niet hoe iets beter kan op het basketbal plein, maar ze kunnen wel een nieuwe inkijk geven op het spel.
+
+
+\section{Verwachte conclusies}
+% TODO: (fase 6) beschrijf wat je verwacht uit je onderzoek en waarom (bv. volgens je literatuuronderzoek is softwarepakket A het meest gebruikte en denk je dat het voor deze casus ook het meest geschikt zal zijn). Natuurlijk kan je niet in de toekomst kijken en mag je geen alternatieve mogelijkheden uitsluiten. In de praktijk gebeurt het ook vaak dat een onderzoek tot verrassende resultaten leidt, dat maakt het proces nog interessanter!
+Na het verwerken van meerdere bronnen, kan ik enigszins wel zeggen dat Artificial Intelligence een zeer krachtige tool kan zijn om te bepalen waar de beste shots op het plein genomen worden. Echter zijn de conclusies die zulke Machine Learning modellen trekken eerder zwart wit, shots aan de driepuntlijn en onder de basket zijn het meest waardevol. Hoewel dat klopt, is het ook belangrijk om te beseffen dat de verworven data niet consistent is. Wat ik hiermee bedoel, is dat als alle coaches op de hoogte zijn van de "ideale strategie" die AI voorstelt, er ook verdedigende strategieën worden ontwikkeld om een antwoord hierop te bieden. Als alle teams zoveel mogelijk driepunters en layups of dunks willen maken, gaan de coaches juist die zones het meest laten verdedigen.
+Ik vermoed daarom dus dat AI de coaching strategie wel kan beïnvloeden, maar dat het enkel zou mogen fungeren als een richtlijn. Een goed team moet dynamisch zijn strategie kunnen aanpassen. Er worden ook vaak nieuwe regels toegevoegd aan het spel, wat ook een effect heeft op de ideale strategie. Dit is ook wel te zien als je FIBA en NBA met elkaar vergelijkt. Volgens FIBA regels mag een verdedigende speler zolang als hij wilt onder de basket blijven staan, in de NBA is er echter een "3 seconden" regel. Als er constant een speler de basket kan verdedigen, is het moeilijker om dicht bij de basket te scoren.
+Kortweg is de data even dynamisch als basketbal en zou het fout zijn om blindelings een AI te vertrouwen, het spel heeft een menselijke toets en is daarom altijd onderhevig aan inconsistentie en verandering. Een AI zal nooit een basketbal team kunnen coachen en dit is naar eigen mening zeer goed.
+
+%------------------------------------------------------------------------------
+% Referentielijst
+%------------------------------------------------------------------------------
+% TODO: (fase 4) de gerefereerde werken moeten in BibTeX-bestand
+% bibliografie.bib voorkomen. Gebruik JabRef om je bibliografie bij te
+% houden.
+\phantomsection
+\printglossary[type=\acronymtype]
+\printglossary
+\clearpage
+\printbibliography[heading=bibintoc]
+\end{document}
